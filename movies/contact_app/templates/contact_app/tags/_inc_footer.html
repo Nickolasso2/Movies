@@ -1,0 +1,367 @@
+{% comment %}
+connected to base.html with {% include %}
+rendered with include tag
+{% endcomment %}
+<!-- Footer -->
+
+<footer class="bg-dark text-center text-white">
+
+  
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+  
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+  
+        <!-- Google -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+  
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+  
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+  
+      <!-- Section: Form -->
+      <section class="">
+        <div style="border: beige 3px dotted;">
+          <h4>форма оброблюється CreateView класом</h4>
+          <h6>valid:<i> редірект через success_url = '/' </i></h6>
+          <h6>invalid:<i> редірект на нову сторінку через template_name рендеринг з копіюванням поточної</i></h6>
+          <form action="{% url 'add_contact'%}" method="post" >
+            <!--Grid row-->
+            <div class="form-error">{{contact_form.non_field.errors}}</div>
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+          
+                  {{form.as_p}}
+                  <textarea  name="contentBlock" id="contentBlockTextArea" cols="3000" rows="1100" style="display:none"></textarea>
+          
+          
+                  <!-- <input type="email" id="form5Example21" class="form-control" /> -->
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4" id="subscriptionButton">
+                  Subscribe
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </form>
+        </div>
+        <div style="border: beige 3px dotted;">
+          <h4>форма оброблюється через функцію та Ajax request</h4>
+          <h6>valid:<i> json response про успіх .редірект відсутній</i></h6>
+          <h6>invalid:<i> json response про помилку. редірект відсутній</i></h6>
+          <form action="{% url 'add_contact2'%}" method="post" id="formSubscription2">
+            <!--Grid row-->
+            <!-- <div class="form-error">{{contact_form.non_field.errors}}</div> -->
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+          
+                  {{form.as_p}}
+                  <textarea  name="contentBlock" id="contentBlockTextArea2" cols="3000" rows="1100" style="display:none"></textarea>
+          
+          
+                  <!-- <input type="email" id="form5Example21" class="form-control" /> -->
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4" id="subscriptionButton2">
+                  Subscribe
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            
+          </form>
+          <div class="form-error" id="form2Error"></div>
+        </div>
+        <div style="border: beige 3px dotted;">
+          <h4>форма оброблюється with def redirect</h4>
+          <h6>valid:<i> redirect('/') </i></h6>
+          <h6>invalid:<i> redirect(request.META.get('HTTP_REFERER'))</i></h6>
+          <form action="{% url 'add_contact3'%}" method="post">
+            <!--Grid row-->
+            <div class="form-error">{{contact_form.non_field.errors}}</div>
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+          
+                  {{form.as_p}}
+                  <textarea  name="contentBlock" id="contentBlockTextArea2" cols="3000" rows="1100" style="display:none"></textarea>
+          
+          
+                  <!-- <input type="email" id="form5Example21" class="form-control" /> -->
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4">
+                  Subscribe
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            
+          </form>
+          <div class="form-error" id="form2Error"></div>
+        </div>
+
+        <div style="border: beige 3px dotted;">
+          <h4>форма оброблюється CreateView класом</h4>
+          <h6>valid:<i> редірект success_url = '/'</i></h6>
+          <h6>invalid:<i> редірект через метод form_invalid()</i></h6>
+          <form action="{% url 'add_contact4'%}" method="post">
+            <!--Grid row-->
+            <div class="form-error">{{contact_form.non_field.errors}}</div>
+            {% csrf_token %}
+            <div class="row d-flex justify-content-center">
+              <!--Grid column-->
+              <div class="col-auto">
+                <p class="pt-2">
+                  <strong>Sign up for our newsletter</strong>
+                </p>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-md-5 col-12">
+                <!-- Email input -->
+                <div class="form-outline form-white mb-4">
+          
+                  {{form.as_p}}
+                  <textarea  name="contentBlock" id="contentBlockTextArea2" cols="3000" rows="1100" style="display:none"></textarea>
+          
+          
+                  <!-- <input type="email" id="form5Example21" class="form-control" /> -->
+                </div>
+              </div>
+              <!--Grid column-->
+              <!--Grid column-->
+              <div class="col-auto">
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-outline-light mb-4">
+                  Subscribe
+                </button>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+            
+          </form>
+          <div class="form-error" id="form2Error"></div>
+        </div>
+      </section>
+      <!-- Section: Form -->
+  
+      <!-- Section: Text -->
+      <section class="mb-4">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+          repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
+          eum harum corrupti dicta, aliquam sequi voluptate quas.
+        </p>
+      </section>
+      <!-- Section: Text -->
+  
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+  
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+  
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  
+<script>
+  subscriptionButton.addEventListener("mouseenter", function(event){
+    
+    let contentBlockHTML = contentBlock.innerHTML;
+contentBlockTextArea.value = contentBlockHTML;
+
+
+  });
+  // script copies the content of block content of the current page into a text area input of the form that submits post request that renders contact_form.html
+
+
+</script>
+<script>
+  function checkSubscriptionForm(e){
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url : "{% url 'add_contact2' %}",
+      data : $(this).serialize(),
+      dataType : 'json',
+      success : function(response){
+        $('#form2Error').text(response.result);
+        if (response.is_valid){
+          $('#formSubscription2').hide();
+        } 
+      }
+      
+    })
+  }
+  formSubscription2.onsubmit = checkSubscriptionForm
+  // or formSubscription2.addEventListener("submit", checkSubscriptionForm);
+  
+
+</script>
