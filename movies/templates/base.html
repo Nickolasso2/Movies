@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+{% load my_tags %}
+{% load contact_tags %}
+
+<html lang="ru">
+
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="{% static 'movies_app/css/bootstrap.css' %}">
+    <!-- Bootstrap-Core-CSS -->
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'movies_app/css/style.css' %}" type="text/css" media="all">
+    <!--// Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="{% static 'movies_app/css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+    /* Checkbox stars */
+.rating {
+    overflow: hidden;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 155px;
+    height: 30px;
+}
+
+.rating > input {
+    opacity: 0;
+    margin-right: -100%;
+}
+
+.rating > label {
+    position: relative;
+    display: block;
+    float: right;
+    background: url('{% static "movies_app/img/star-off-big.png" %}');
+    background-size: 30px 30px;
+}
+
+.rating > label:before {
+    display: block;
+    opacity: 0;
+    content: '';
+    width: 30px;
+    height: 30px;
+    background: url('{% static "movies_app/img/star-on-big.png" %}');
+    background-size: 30px 30px;
+    transition: opacity 0.2s linear;
+}
+
+.rating > label:hover:before, .rating > label:hover ~ label:before, .rating:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
+
+
+/* //Checkbox stars */
+</style>
+        
+
+</head>
+
+<body>
+    
+
+
+    {% load i18n %}
+  
+    <form action="{% url 'set_lang' %}" method="get" >{% csrf_token %}
+        
+        <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="current_url" value="{{request.path}}">
+        <input type="submit" value="Go">
+    </form>
+
+    
+
+    <div id="page" class="page">
+        <div style="background-image: url('{% static 'movies_app/img/home-banner.jpg' %}');" id="home">
+            <header class="header">
+                <div class="container-fluid px-lg-5">
+                    <!-- nav -->
+                    <nav class="py-4">
+                        <div id="logo">
+                            <h1><a href="index.html" class="editContent"
+                                    style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family: Source Sans Pro;">DjangoMovie</a>
+                            </h1>
+                        </div>
+
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop">
+                        <ul class="menu mt-2">
+                            <li class="active"><a href="index.html">Главная</a></li>
+                            <li>
+
+                                <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down"
+                                        aria-hidden="true"></span> </label>
+                                <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                <input type="checkbox" id="drop-2">
+                                <ul>
+
+                                    {% for category in categories %}
+                                    <li><a href="/">{{ category.name }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </nav>
+
+                </div>
+            </header>
+
+            <div class="banner-info">
+                <p class="editContent">лучший сайт на django 3</p>
+                <h3 class="mb-4 editContent">Все о кино</h3>
+                <div class="ban-buttons">
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <ol class="breadcrumb editContent">
+            <li class="breadcrumb-item">
+                <a href="index.html" class="editContent">Home</a>
+            </li>
+            <li class="breadcrumb-item active editContent">Single Page</li>
+        </ol>
+
+<!-- форма пошуку по назві -->
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="looking_for">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+        
+
+
+        <div style="display:flex; justify-content: flex-start;">
+            {% show_sidebar %}
+            
+            {% block content %}{% endblock %}
+
+        </div>
+        {% block pagination %}
+        {% include '_inc/_movies_pagination.html' %}
+        gfjkh
+        {% endblock %}
+
+        {% block comments %}{% endblock %}
+
+        {% block footer %}
+            {% footer %}
+        {% endblock %}
+
+        <script src="{% static 'movies_app/js/filter_ajax.js' %}"></script>
+       
+           
+       
+
+</body>
+
+</html>

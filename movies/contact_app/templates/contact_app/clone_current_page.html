@@ -1,0 +1,18 @@
+<!-- the page to be downloaded if form via Createview in _inc_footer.html is not valid -->
+
+{% extends 'base.html' %}
+{% block content %}
+    {{contentBlock|safe}}
+{% endblock %}
+{% block footer %}
+    {% include 'contact_app/tags/_inc_footer.html' %}
+
+    <script>
+        console.log('script from contect form')
+        function scrollFunc(){
+        
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    scrollFunc();
+    </script>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2REDIRECT2</title>
+</head>
+<body>
+    <h1>22222222222222222222222222222222222222222222222222</h1>
+    <form action="{% url 'redirect2'%}" method="post">
+        <!--Grid row-->
+        <div class="form-error">{{contact_form.non_field.errors}}</div>
+        {% csrf_token %}
+        <div class="row d-flex justify-content-center">
+          <!--Grid column-->
+          <div class="col-auto">
+            <p class="pt-2">
+              <strong>Sign up for our newsletter</strong>
+            </p>
+          </div>
+          <!--Grid column-->
+          <!--Grid column-->
+          <div class="col-md-5 col-12">
+            <!-- Email input -->
+            <div class="form-outline form-white mb-4">
+      
+              {{form.as_p}}
+              <textarea  name="contentBlock" id="contentBlockTextArea2" cols="3000" rows="1100" style="display:none"></textarea>
+      
+      
+              <!-- <input type="email" id="form5Example21" class="form-control" /> -->
+            </div>
+          </div>
+          <!--Grid column-->
+          <!--Grid column-->
+          <div class="col-auto">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-outline-light mb-4" >
+              Subscribe
+            </button>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+        
+      </form>
+</body>
+</html>
