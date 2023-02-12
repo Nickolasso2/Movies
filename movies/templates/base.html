@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 {% load static %}
 {% load my_tags %}
-{% load contact_tags %}
+{% load contact_tags i18n %}
 
-<html lang="ru">
+<html lang="uk">
 
 <head>
     <!-- //Meta tag Keywords -->
@@ -73,13 +73,9 @@
 
 <body>
     
-
-
-    {% load i18n %}
-  
     <form action="{% url 'set_lang' %}" method="get" >{% csrf_token %}
         
-        <select name="language">
+        <select name="language" onchange="this.form.submit()">
             {% get_current_language as LANGUAGE_CODE %}
             {% get_available_languages as LANGUAGES %}
             {% get_language_info_list for LANGUAGES as languages %}
@@ -90,7 +86,6 @@
             {% endfor %}
         </select>
         <input type="hidden" name="current_url" value="{{request.path}}">
-        <input type="submit" value="Go">
     </form>
 
     
@@ -133,8 +128,8 @@
             </header>
 
             <div class="banner-info">
-                <p class="editContent">лучший сайт на django 3</p>
-                <h3 class="mb-4 editContent">Все о кино</h3>
+                <p class="editContent">{% trans 'Мій сайт' %}</p>
+                <h3 class="mb-4 editContent">{% trans 'Все про кіно' %}</h3>
                 <div class="ban-buttons">
 
 
@@ -179,13 +174,12 @@
             {% footer %}
         {% endblock %}
 
+        <!-- для переклду js тут не працює -->
+        <script src="{% url 'javascript-catalog' %}"></script>
+
         <script src="{% static 'movies_app/js/filter_ajax.js' %}"></script>
        
-        <script>
-        let cur_path = {{ request.path }}
-        console.log(window.location.href)
-        </script>
-        
+           
        
 
 </body>

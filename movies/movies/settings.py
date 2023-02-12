@@ -216,5 +216,8 @@ LANGUAGES = [
     ('en', _('English')),
 ]
 
+# MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
+# MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'en'
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 

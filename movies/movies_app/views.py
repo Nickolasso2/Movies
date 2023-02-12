@@ -251,7 +251,7 @@ class SearchView(ListView):
 
     def get_queryset(self):
         
-        return Movie.objects.filter(title__icontains=self.request.GET.get('looking_for'))
+        return Movie.objects.filter(title__icontains=self.request.GET.get('looking_for', ''))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -262,7 +262,7 @@ class SearchView(ListView):
 class SetLang(View):
 
     def get(self, request):
-        current_url = request.GET.get("current_url")
+        current_url = request.GET.get("current_url")#/de/movies/django-free/
         current_url_cut = current_url[3:]
         language = request.GET.get("language")
         new_url = '/' + language + current_url_cut
