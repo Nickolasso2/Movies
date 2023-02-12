@@ -6,6 +6,7 @@ from tabnanny import verbose
 from django.db import models
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
+from django.utils.translation import gettext as _
 
 class Category(models.Model):
     # films by category
@@ -51,15 +52,15 @@ class Genre(models.Model):
         verbose_name_plural = 'Жанри'
 
 class Movie(models.Model):
-    title = models.CharField('Назва', max_length=100)
-    tagline = models.CharField(verbose_name='Слоган', max_length=100, default='')
-    description = models.TextField('Опис')
-    poster = models.ImageField('Постер', upload_to='movies/')
-    year = models.PositiveSmallIntegerField('Рік прем\'єри')
-    country = models.CharField('Країна', max_length=30)
-    director = models.ManyToManyField(Actor, verbose_name='режисер', related_name='film_director')
-    actors = models.ManyToManyField(Actor, verbose_name='актори', related_name='film_actors')
-    genres = models.ManyToManyField(Genre, verbose_name='жанри')
+    title = models.CharField(verbose_name=_('Назва фільму'), max_length=100)#verbose_name=_('Назва фільму') повинно перекладати поля моделі в адмінці але не працює
+    tagline = models.CharField(verbose_name=_('Слоган'), max_length=100, default='')
+    description = models.TextField(verbose_name=_('Опис'))
+    poster = models.ImageField(verbose_name=_('Постер'), upload_to='movies/')
+    year = models.PositiveSmallIntegerField(verbose_name=_('Рік'))
+    country = models.CharField(verbose_name=_('Країна'), max_length=30)
+    director = models.ManyToManyField(Actor, verbose_name=_('Режисер'), related_name='film_director')
+    actors = models.ManyToManyField(Actor, verbose_name=_('Актори'), related_name='film_actors')
+    genres = models.ManyToManyField(Genre, verbose_name=_('Жанри'))
     world_premiere =models.DateField('Дата прем\'єри', default=date.today)
     budget = models.PositiveIntegerField('Бюджет', default=0, help_text='вказати суму в доларах США')
     fees_in_usa = models.PositiveIntegerField('Збори в світі', default=0, help_text='вказати суму в доларах США')

@@ -73,9 +73,6 @@
 
 <body>
     
-   
-    
-  
     <form action="{% url 'set_lang' %}" method="get" >{% csrf_token %}
         
         <select name="language" onchange="this.form.submit()">
@@ -176,6 +173,9 @@
         {% block footer %}
             {% footer %}
         {% endblock %}
+
+        <!-- для переклду js тут не працює -->
+        <script src="{% url 'javascript-catalog' %}"></script>
 
         <script src="{% static 'movies_app/js/filter_ajax.js' %}"></script>
        
