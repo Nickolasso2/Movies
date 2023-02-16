@@ -72,6 +72,32 @@
 </head>
 
 <body>
+
+<!-- temolate.html has an socialaccount.instance.
+just showing properties  -->
+<ul>
+    <li>Avatar URL: {{ user.socialaccount_set.all.0.get_avatar_url }}</li>
+    <li>UID: {{ user.socialaccount_set.all.0.uid }}</li>
+    <li>Date Joined: {{ user.socialaccount_set.all.0.date_joined}}</li>
+    <li>Last Login: {{ user.socialaccount_set.all.0.last_login}}</li>
+    <li>Full Name: {{ user.socialaccount_set.all.0.extra_data.name }}</li>
+</ul>
+<!-- ------------------------------------------------------------ -->
+    
+    <div class="container text-dark mt-5">
+        <div class="row justify-content-md-center">
+          <div class="col-md-5 p-3">
+                <h1>My Google Login Project</h1>
+                {% if user.is_authenticated %}
+                <p>Welcome, {{ user.username }} !</p>
+                {% else %}
+                <h1>Welcome Friend, please log in</h1>
+                {% endif %}
+          </div>
+        </div>
+      </div>
+
+    
     
     <form action="{% url 'set_lang' %}" method="get" >{% csrf_token %}
         
@@ -106,6 +132,12 @@
                         <input type="checkbox" id="drop">
                         <ul class="menu mt-2">
                             <li class="active"><a href="index.html">Главная</a></li>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'account_logout' %}">Вихід</a></li>
+                            {% else %}
+                                <li><a href="{% url 'account_login' %}">Вхід</a></li>
+                                <li><a href="{% url 'account_signup' %}">Зареєструватись</a></li>
+                            {% endif %}
                             <li>
 
                                 <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down"
